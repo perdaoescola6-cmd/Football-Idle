@@ -131,14 +131,22 @@ export function substituteFootball(
     ownSide: side === "HOME" ? 0 : 1,
     formation: m.formation,
     tactic: m.tactic,
+    captain: team.some((c) => c.id === m.captainId) ? m.captainId : undefined,
     fromMinute: minute + 1,
     initialScore: score,
     fatigue: true,
-    entries: Object.fromEntries(
-      appearances
-        .filter((p) => p.to === undefined)
-        .map((p) => [p.card.id, p.from]),
-    ),
+    entries: {
+      HOME: Object.fromEntries(
+        appearances
+          .filter((p) => p.side === "HOME" && p.to === undefined)
+          .map((p) => [p.card.id, p.from]),
+      ),
+      AWAY: Object.fromEntries(
+        appearances
+          .filter((p) => p.side === "AWAY" && p.to === undefined)
+          .map((p) => [p.card.id, p.from]),
+      ),
+    },
   });
   m.events = [
     ...past,

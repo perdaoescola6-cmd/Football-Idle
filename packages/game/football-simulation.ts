@@ -38,7 +38,7 @@ export function simulateFootball(input: {
   fromMinute?: number;
   initialScore?: [number, number];
   fatigue?: boolean;
-  entries?: Record<string, number>;
+  entries?: Partial<Record<"HOME" | "AWAY", Record<string, number>>>;
 }): { events: FootballEvent[]; score: [number, number] } {
   const rng = randomStream(input.seed, "events-v2"),
     teams = [input.home, input.away],
@@ -58,11 +58,15 @@ export function simulateFootball(input: {
               : "ATA"),
       1,
     );
-  const attrs = (c: CardEdition) => {
+  const attrs = (c: CardEdition, side: number) => {
     const base = baseAttrs(c);
     if (!input.fatigue) return base;
     const factor = conditionMultiplier(
-      playerEnergy(c, currentMinute, input.entries?.[c.id] ?? 0),
+      playerEnergy(
+        c,
+        currentMinute,
+        input.entries?.[side === 0 ? "HOME" : "AWAY"]?.[c.id] ?? 0,
+      ),
     );
     const result = { ...base };
     for (const key of Object.keys(base) as (keyof typeof base)[])
@@ -124,12 +128,15 @@ export function simulateFootball(input: {
       name: string;
       minute: number;
     } | null = null;
-  const avg = (team: CardEdition[], key: keyof ReturnType<typeof attrs>) =>
-    team.reduce((sum, c) => sum + attrs(c)[key], 0) / team.length;
+  const avg = (
+    team: CardEdition[],
+    key: keyof ReturnType<typeof attrs>,
+    side: number,
+  ) => team.reduce((sum, c) => sum + attrs(c, side)[key], 0) / team.length;
   for (let minute = input.fromMinute ?? 1; minute < 90; minute++) {
     currentMinute = minute;
     const advantage =
-      (avg(teams[0], "passing") - avg(teams[1], "passing")) * 0.2;
+      (avg(teams[0], "passing", 0) - avg(teams[1], "passing", 1)) * 0.2;
     if (rng(100) < 24) {
       side = rng(100) < 50 + advantage ? 0 : 1;
       owner = 5 + rng(6);
@@ -175,7 +182,7 @@ export function simulateFootball(input: {
       owner = receiver;
     }
     const attacking = team[owner],
-      a = attrs(attacking),
+      a = attrs(attacking, side),
       own = side === input.ownSide;
     const tactic = own
       ? input.tactic === "ATTACK"
@@ -198,7 +205,7 @@ export function simulateFootball(input: {
       own && team.some((c) => c.id === input.captain) ? 1.015 : 1;
     const shotChance = Math.min(
       38,
-      (10 + a.finishing * 0.11 - avg(other, "defending") * 0.035) *
+      (10 + a.finishing * 0.11 - avg(other, "defending", 1 - side) * 0.035) *
         tactic *
         shape *
         leadership,
@@ -218,7 +225,7 @@ export function simulateFootball(input: {
         narration: `${attacking.player} finaliza!`,
       });
       const goalie = other[0],
-        g = attrs(goalie),
+        g = attrs(goalie, 1 - side),
         onTarget = rng(100) < Math.min(90, 45 + a.finishing * 0.35);
       if (onTarget) {
         const conversion = Math.max(
