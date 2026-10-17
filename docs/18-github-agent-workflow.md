@@ -19,11 +19,13 @@ A cópia isolada github-football-idle usa a história existente e a branch codex
 
 CI valida estilo (Prettier), tipos, testes de jogo/API/persistência e build Next.js em Node 22 no Linux e Windows. O PostgreSQL embutido atende os testes; não há banco de produção nem segredo necessário. Não se usa pull_request_target nem execução de agente com secrets em código de forks.
 
-Política desejada para main: PR obrigatório, uma aprovação, checks validate (ubuntu-latest) e validate (windows-latest), conversas resolvidas, proibir force push e deleção. A proteção deve ser confirmada no GitHub; instruções escritas não equivalem a uma regra habilitada. Auto-merge já estava desativado na inspeção. Se a conexão não oferecer administração de regras, registrar essa limitação e aplicar via Settings > Branches/Rules ou CLI autenticado.
+Proteção aplicada e confirmada via API em 17/10/2026: PR obrigatório, uma aprovação, checks validate (ubuntu-latest) e validate (windows-latest) com branch atualizada, conversas resolvidas, force push e deleção proibidos. A conta administradora mantém bypass manual, pois o proprietário é também o autor dos PRs e não pode aprovar o próprio PR. O agente não usa esse bypass para integrar mudanças. Auto-merge permanece desativado. A integração GitHub devolveu 403 ao consultar proteção; a credencial Git já configurada permitiu aplicar a regra via API, sem imprimir ou salvar o segredo.
+
+Verificação local da importação: npm ci, lint, tipos, 51/51 testes e build aprovados. No sandbox Windows, um teste de reabertura PGlite abortou; repetição com acesso local normal passou integralmente. A primeira CI Linux passou; o Windows revelou conversão CRLF pelo checkout, corrigida com .gitattributes para LF. Capturas importadas são históricas; não houve novo QA de navegador nesta integração.
 
 ## Acompanhamento periódico
 
-Rotina proposta: uma verificação diária às 10h de São Paulo neste chat. Inspecionar o PR de integração e seu CI; depois da integração, selecionar no máximo uma issue seguindo o ciclo acima. Sem iniciar outra enquanto houver PR autônomo aguardando revisão. Notificar apenas mudança significativa, conclusão, falha ou ação humana necessária; ficar em silêncio quando o estado não mudar.
+Rotina criada no aplicativo, ID football-idle-acompanhamento-di-rio: uma verificação diária às 10h de São Paulo neste chat. Inspecionar o PR de integração e seu CI; depois da integração, selecionar no máximo uma issue seguindo o ciclo acima. Sem iniciar outra enquanto houver PR autônomo aguardando revisão. Notificar apenas mudança significativa, conclusão, falha ou ação humana necessária; ficar em silêncio quando o estado não mudar. A rotina só foi cadastrada; sua primeira execução ainda não foi observada.
 
 A execução depende de agenda habilitada, computador ligado, aplicativo em execução, acesso aos arquivos/GitHub e limites da conta. Não equivale a operação contínua 24/7. Uma agenda só está ativa após confirmação da ferramenta do aplicativo; não há cron de agente no GitHub Actions nem uso automático de chaves de API.
 
