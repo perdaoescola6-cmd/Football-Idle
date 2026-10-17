@@ -1,0 +1,8 @@
+{
+  "source": "https://fdp.fifa.org/assetspublic/ce44/pdf/SquadLists-English.pdf",
+  "referenceYear": 2022,
+  "records": 831,
+  "sha256": "2a75fb43fb871564ef040c1e81f9260c85b6a9ea7fc3b7c68cd5723d6de7e874",
+  "extraction": "PDF character coordinates; first/last names, DOB, club, height, broad position; no media",
+  "attribution": "FIFA World Cup Qatar 2022 Squad List, 18 December 2022, version 1. Factual fields extracted for local development."
+}
