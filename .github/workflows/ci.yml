@@ -36,5 +36,6 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run lint
       - run: npm run typecheck
+      - run: npm run audit:catalog -- --check-report
       - run: npm test
       - run: npm run build:check

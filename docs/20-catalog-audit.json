@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "counts": {
+    "editions": 854,
+    "identities": 844,
+    "sourceRecords": 831,
+    "sourceCountries": 32,
+    "byRarity": {
+      "Bronze": 231,
+      "Prata": 279,
+      "Ouro": 243,
+      "Lendário": 89,
+      "Fenômeno": 12
+    },
+    "byReferenceYear": {
+      "2022": 841,
+      "2024": 3,
+      "2025": 2,
+      "2026": 8
+    }
+  },
+  "source": {
+    "source": "https://fdp.fifa.org/assetspublic/ce44/pdf/SquadLists-English.pdf",
+    "referenceYear": 2022,
+    "records": 831,
+    "sha256": "2a75fb43fb871564ef040c1e81f9260c85b6a9ea7fc3b7c68cd5723d6de7e874",
+    "extraction": "PDF character coordinates; first/last names, DOB, club, height, broad position; no media",
+    "attribution": "FIFA World Cup Qatar 2022 Squad List, 18 December 2022, version 1. Factual fields extracted for local development.",
+    "verification": "Committed source snapshot and supplements; not a live factual recertification."
+  },
+  "sharedIdentities": [
+    {
+      "playerId": "WC22-BRA-02",
+      "editions": [
+        "BR24-002",
+        "WC22-BRA-02"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-07",
+      "editions": [
+        "BR24-009",
+        "WC22-BRA-07"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-25",
+      "editions": [
+        "BR24-011",
+        "WC22-BRA-25"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-23",
+      "editions": [
+        "BR24-016",
+        "WC22-BRA-23"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-14",
+      "editions": [
+        "BR24-017",
+        "WC22-BRA-14"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-17",
+      "editions": [
+        "BR24-018",
+        "WC22-BRA-17"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-01",
+      "editions": [
+        "BR24-020",
+        "WC22-BRA-01"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-04",
+      "editions": [
+        "BR24-021",
+        "WC22-BRA-04"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-21",
+      "editions": [
+        "BR24-022",
+        "WC22-BRA-21"
+      ]
+    },
+    {
+      "playerId": "WC22-BRA-20",
+      "editions": [
+        "BR24-023",
+        "WC22-BRA-20"
+      ]
+    }
+  ],
+  "exceptions": {
+    "missingHeight": [
+      "BR24-001",
+      "BR24-008",
+      "BR24-012",
+      "BR24-013"
+    ],
+    "unknownPreferredFoot": {
+      "count": 851,
+      "policy": "Remain null; never infer undocumented feet or height."
+    }
+  },
+  "errors": []
+}
