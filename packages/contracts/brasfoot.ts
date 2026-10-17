@@ -149,7 +149,42 @@ export const packs: PackDefinition[] = [
     weights: [1200, 2500, 4700, 1450, 150],
   },
 ];
+export function validatePackDefinition(pack: PackDefinition) {
+  if (
+    !Number.isSafeInteger(pack.price) ||
+    pack.price <= 0 ||
+    pack.weights.length !== rarities.length ||
+    Array.from(pack.weights).some(
+      (weight) => !Number.isSafeInteger(weight) || weight < 0,
+    ) ||
+    pack.weights.reduce((sum, weight) => sum + weight, 0) !== 10000 ||
+    pack.floors.length !== 5 ||
+    Array.from(pack.floors).some(
+      (floor) =>
+        !Number.isInteger(floor) || floor < 0 || floor >= rarities.length,
+    )
+  )
+    throw new RangeError("Invalid pack definition");
+}
+function validatePackSlot(pack: PackDefinition, slot: number) {
+  validatePackDefinition(pack);
+  if (!Number.isInteger(slot) || slot < 0 || slot >= 5)
+    throw new RangeError("Invalid pack slot");
+}
+export function packRarityIndex(
+  pack: PackDefinition,
+  slot: number,
+  roll: number,
+) {
+  validatePackSlot(pack, slot);
+  if (!Number.isInteger(roll) || roll < 0 || roll >= 10000)
+    throw new RangeError("Invalid pack roll");
+  let total = 0;
+  const rolled = pack.weights.findIndex((weight) => (total += weight) > roll);
+  return Math.max(pack.floors[slot], rolled);
+}
 export function slotOdds(pack: PackDefinition, slot: number) {
+  validatePackSlot(pack, slot);
   return pack.weights.map((_, rarity) =>
     pack.weights.reduce(
       (sum, weight, rolled) =>
@@ -159,6 +194,8 @@ export function slotOdds(pack: PackDefinition, slot: number) {
   );
 }
 export function phenomenonChance(pack: PackDefinition) {
+  validatePackDefinition(pack);
+  if (pack.floors.includes(rarities.length - 1)) return 1;
   return 1 - (1 - pack.weights[4] / 10000) ** 5;
 }
 export interface Standing {
