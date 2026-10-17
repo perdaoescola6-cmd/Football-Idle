@@ -1,0 +1,172 @@
+{
+  "version": "E2.1",
+  "license": "Original project artwork",
+  "rendering": "SVG crispEdges; integer coordinates; 3× nominal export, scalable; no bitmap duplication",
+  "assets": [
+    {
+      "id": "environment-stadium",
+      "path": "/assets/e2/environment-stadium.svg",
+      "width": 480,
+      "height": 272,
+      "displayWidth": 1440,
+      "displayHeight": 816,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "environment-locker",
+      "path": "/assets/e2/environment-locker.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "environment-training",
+      "path": "/assets/e2/environment-training.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "environment-scout",
+      "path": "/assets/e2/environment-scout.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "environment-market",
+      "path": "/assets/e2/environment-market.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "environment-depot",
+      "path": "/assets/e2/environment-depot.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "environment-league",
+      "path": "/assets/e2/environment-league.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "environment",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-varzea",
+      "path": "/assets/e2/region-varzea.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-regional",
+      "path": "/assets/e2/region-regional.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-estadual",
+      "path": "/assets/e2/region-estadual.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-nacional",
+      "path": "/assets/e2/region-nacional.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-continental",
+      "path": "/assets/e2/region-continental.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-europa",
+      "path": "/assets/e2/region-europa.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "region-elite",
+      "path": "/assets/e2/region-elite.svg",
+      "width": 320,
+      "height": 112,
+      "displayWidth": 960,
+      "displayHeight": 336,
+      "version": 2,
+      "category": "region",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    },
+    {
+      "id": "item-common-supply",
+      "path": "/assets/e2/item-common-supply.svg",
+      "width": 32,
+      "height": 32,
+      "displayWidth": 96,
+      "displayHeight": 96,
+      "version": 2,
+      "category": "item",
+      "source": "Arte vetorial procedural original do projeto; sem arquivos externos."
+    }
+  ]
+}
