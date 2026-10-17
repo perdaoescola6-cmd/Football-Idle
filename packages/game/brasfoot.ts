@@ -3,6 +3,8 @@ import {
   packs,
   PACK_VERSION,
   rarities,
+  packRarityIndex,
+  validatePackDefinition,
   type PackDefinition,
   type Formation,
   type Tactic,
@@ -137,17 +139,7 @@ export function football(s: State) {
   return s.runtime.brasfoot;
 }
 export function packRarity(pack: PackDefinition, slot: number, roll: number) {
-  if (
-    !Number.isInteger(roll) ||
-    roll < 0 ||
-    roll >= 10000 ||
-    slot < 0 ||
-    slot > 4
-  )
-    throw new RangeError("Invalid pack roll");
-  let total = 0;
-  const rolled = pack.weights.findIndex((w) => (total += w) > roll);
-  return rarities[Math.max(pack.floors[slot], rolled)];
+  return rarities[packRarityIndex(pack, slot, roll)];
 }
 export function initializeFootball(s: State, now: number) {
   if (s.runtime.brasfoot) return; // one-time, regardless of command keys
@@ -191,6 +183,7 @@ export function openPack(
   const f = football(s),
     pack = packs.find((p) => p.id === packId);
   if (!pack) throw new GameError("PACK_NOT_FOUND", "Pacote inexistente.");
+  validatePackDefinition(pack);
   if (!packFocuses.includes(focus) || (welcome && focus !== "GENERAL"))
     throw new GameError(
       "INVALID_FOCUS",
@@ -203,26 +196,26 @@ export function openPack(
     throw new GameError("INVALID_WELCOME", "Boas-vindas usa o pack Básico.");
   if (f.cards.length + 5 > 5000)
     throw new GameError("COLLECTION_FULL", "Venda cartas para liberar espaço.");
-  if (!welcome)
-    coins(
-      s,
-      -BigInt(pack.price),
-      `PACK:${version}:${pack.id}${focus === "GENERAL" ? "" : ":" + focus}`,
-      now,
-    );
   const id = randomUUID(),
     rng = randomStream(deriveSeed(s.runtime.secret, id), "pack");
   const rolls: number[] = [],
     fallbackSlots: number[] = [],
-    acquired = [];
+    acquired = [],
+    ownedEditions = new Set(f.cards.map((card) => card.editionId));
   for (let slot = 0; slot < 5; slot++) {
     const roll = rng(10000);
     rolls.push(roll);
     const rarity = packRarity(pack, slot, roll),
       pool = focusedPool(catalog, rarity, focus);
+    if (!pool.cards.length)
+      throw new GameError(
+        "PACK_UNAVAILABLE",
+        "Pacote indisponível: catálogo incompleto. Nenhuma moeda foi cobrada.",
+        503,
+      );
     if (pool.fallback) fallbackSlots.push(slot);
     const card = pool.cards[rng(pool.cards.length)],
-      duplicate = f.cards.some((c) => c.editionId === card.id);
+      duplicate = ownedEditions.has(card.id);
     const owned = {
       id: randomUUID(),
       editionId: card.id,
@@ -238,9 +231,19 @@ export function openPack(
         { clubId: s.id, name: s.name, at: now, kind: "ACQUIRED" as const },
       ],
     };
-    f.cards.push(owned);
     acquired.push(owned);
+    ownedEditions.add(card.id);
   }
+  // Prepare all five cards before touching the wallet or collection. API persistence
+  // remains transactional; direct engine calls also fail without partial delivery.
+  if (!welcome)
+    coins(
+      s,
+      -BigInt(pack.price),
+      `PACK:${version}:${pack.id}${focus === "GENERAL" ? "" : ":" + focus}`,
+      now,
+    );
+  f.cards.push(...acquired);
   if (welcome) f.welcomeClaimed = true;
   const receipt = {
     id,
