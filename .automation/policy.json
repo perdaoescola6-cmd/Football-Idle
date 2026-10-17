@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "repository": "perdaoescola6-cmd/Football-Idle",
+  "trustedAuthors": ["perdaoescola6-cmd"],
+  "readyLabel": "agent:ready",
+  "blockedLabels": ["agent:blocked", "human-required"],
+  "maxOpenPullRequests": 3,
+  "maxRepairAttempts": 3,
+  "stateBranch": "automation/state",
+  "infrastructureBranches": ["codex/autonomy-setup"],
+  "topicOrder": [
+    "catalog",
+    "packs",
+    "rankings",
+    "competition",
+    "visual",
+    "collection",
+    "scouting"
+  ],
+  "requiredChecks": ["validate (ubuntu-latest)", "validate (windows-latest)"],
+  "validationCommands": [
+    "npm ci --no-audit --no-fund",
+    "npm run lint",
+    "npm run typecheck",
+    "npm run audit:catalog -- --check-report",
+    "npm test",
+    "npm run build:check"
+  ],
+  "schedule": {
+    "timezone": "America/Sao_Paulo",
+    "hours": [8, 10, 12, 14, 16, 18, 20, 22]
+  },
+  "automaticMerge": false,
+  "productionDeploy": false,
+  "forcePush": false
+}
