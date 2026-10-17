@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "audit:catalog": "node --import tsx scripts/audit-catalog.mjs",
     "lint": "prettier --check \"apps/server/**/*.ts\" \"apps/web/app/**/*.{ts,tsx,css}\" \"packages/**/*.ts\" \"scripts/*.mjs\" \"tests/*.ts\" \"*.json\" \".github/**/*.{yml,md}\"",
     "dev": "node scripts/dev.mjs",
     "dev:web": "next dev apps/web --hostname 127.0.0.1 --port 3000",

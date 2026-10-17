@@ -10,6 +10,8 @@ Node.js 22+ e npm. Execute `npm ci` e `npm run dev`. Abra http://127.0.0.1:3000;
 
 Execute `npm run lint`, `npm run typecheck`, `npm test` e `npm run build:check`. Lint verifica estilo com Prettier; TypeScript verifica tipos. GitHub Actions executa essas verificações em Linux e Windows, sem credenciais de produção.
 
+`npm run audit:catalog` confere identidades, biografias, fontes e atributos contra os registros históricos versionados. Veja a [auditoria e suas exceções](docs/20-auditoria-catalogo.md). A CI também executa essa verificação.
+
 ## Estado e contribuição
 
 O catálogo importado tem 844 identidades e 854 edições históricas; ratings e odds são regras experimentais. A campanha é individual contra AI em regulamento compacto, sem reproduzir integralmente os campeonatos da CBF. Não há pagamentos reais implementados.
