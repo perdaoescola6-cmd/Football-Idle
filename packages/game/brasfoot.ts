@@ -19,6 +19,7 @@ import { deriveSeed, randomStream } from "./random.js";
 import { effectiveCard, playerIdentity } from "../contracts/card-model.js";
 import { simulateFootball, matchStatistics } from "./football-simulation.js";
 import { ensureCareer, recordPerformance } from "./football-career.js";
+import { assertCompletedSeason } from "./season-validation.js";
 
 import { playingMinute } from "../contracts/match-management.ts";
 
@@ -71,6 +72,14 @@ export const divisionClubs = [
   ],
 ];
 export function createSeason(s: State, division = 0, number = 1): Season {
+  if (
+    !Number.isInteger(division) ||
+    division < 0 ||
+    division >= divisionClubs.length ||
+    !Number.isSafeInteger(number) ||
+    number < 1
+  )
+    throw new RangeError("Invalid season division or number");
   const table = [s.name, ...divisionClubs[division]].map((name, i) => ({
     id: i === 0 ? s.id : `AI-${division}-${i}`,
     name,
@@ -122,10 +131,19 @@ export function standings(season: Season) {
       b.wins - a.wins ||
       b.gf - b.ga - (a.gf - a.ga) ||
       b.gf - a.gf ||
-      a.id.localeCompare(b.id),
+      (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
   );
 }
 export function nextDivision(division: number, position: number) {
+  if (
+    !Number.isInteger(division) ||
+    division < 0 ||
+    division >= divisionClubs.length ||
+    !Number.isInteger(position) ||
+    position < 1 ||
+    position > 8
+  )
+    throw new RangeError("Invalid division or standing position");
   return position <= 2
     ? Math.min(3, division + 1)
     : position >= 7
@@ -699,8 +717,10 @@ export function newFootballSeason(s: State, now = Date.now()) {
     season = f.season;
   if (f.match || season.round <= 14)
     throw new GameError("SEASON_ACTIVE", "Conclua as 14 rodadas.");
+  assertCompletedSeason(season, s.id);
   const position = standings(season).findIndex((t) => t.id === s.id) + 1,
-    division = nextDivision(season.division, position);
+    division = nextDivision(season.division, position),
+    nextSeason = createSeason(s, division, season.number + 1);
   f.seasons.push({
     number: season.number,
     division: season.division,
@@ -718,7 +738,7 @@ export function newFootballSeason(s: State, now = Date.now()) {
     `BR_SEASON_PRIZE:${season.number}:${position}`,
     now,
   );
-  f.season = createSeason(s, division, season.number + 1);
+  f.season = nextSeason;
 }
 export function footballView(
   s: State,
