@@ -28,6 +28,7 @@ import {
 } from "../packages/game/brasfoot.js";
 import { openDatabase } from "../apps/server/src/db.js";
 import { buildApp } from "../apps/server/src/app.js";
+import { completedSeason } from "./season-fixtures.js";
 
 function club() {
   const s = createClub(randomUUID(), "Clube QA", "seed-br-qa", 1000);
@@ -57,11 +58,7 @@ test("promotion and relegation create fresh calendars in all four divisions whil
     for (const promoted of [true, false]) {
       const s = club(),
         f = s.runtime.brasfoot!;
-      f.season.division = division;
-      f.season.round = 15;
-      f.season.table.find((t) => t.id === s.id)!.points = promoted
-        ? 1000
-        : -1000;
+      f.season = completedSeason(s, division, promoted);
       const cards = structuredClone(f.cards),
         xp = s.runtime.clubXp;
       newFootballSeason(s);
