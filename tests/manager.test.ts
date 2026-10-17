@@ -272,6 +272,42 @@ test("manager API: pause/resume idempotency, malicious clock rejected, persisten
     assert.equal(g.brasfoot.match, null);
     assert.equal(g.brasfoot.season.round, 2);
     assert.equal(g.brasfoot.lastRound.matches.length, 4);
+    const settled = structuredClone(g);
+    for (const match of g.brasfoot.lastRound.matches) {
+      assert.deepEqual(match.score, [
+        match.events.filter(
+          (e: { type: string; side: string }) =>
+            e.type === "GOAL" && e.side === "HOME",
+        ).length,
+        match.events.filter(
+          (e: { type: string; side: string }) =>
+            e.type === "GOAL" && e.side === "AWAY",
+        ).length,
+      ]);
+      assert.deepEqual(match.score, [
+        match.statistics.home.goals,
+        match.statistics.away.goals,
+      ]);
+    }
+    now += 5000;
+    await built.repo.tick();
+    await built.app.close();
+    built = await buildApp(db, { clock: () => now });
+    await built.repo.tick();
+    g = await view();
+    assert.equal(g.wallet.balance, settled.wallet.balance);
+    assert.deepEqual(g.brasfoot.history, settled.brasfoot.history);
+    assert.deepEqual(g.brasfoot.lastRound, settled.brasfoot.lastRound);
+    assert.deepEqual(g.brasfoot.performance, settled.brasfoot.performance);
+    assert.deepEqual(g.brasfoot.season, settled.brasfoot.season);
+    const reward = (
+      await db.query<{ count: string; total: string }>(
+        "SELECT count(*)::text count, sum(delta)::text total FROM coin_ledger_entries WHERE reason=$1",
+        [`BR_OFFICIAL_MATCH:${matchId}`],
+      )
+    ).rows[0];
+    assert.equal(reward.count, "1");
+    assert.equal(reward.total, String(g.brasfoot.history[0].reward));
   } finally {
     await built.app.close();
     await db.close();
