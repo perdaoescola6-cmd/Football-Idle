@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:37:13.724Z",
+  "lastUpdated": "2026-10-18T00:38:41.675Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -84,8 +84,8 @@
       "branch": "codex/13-visual",
       "issueNumber": 13,
       "pullRequest": 16,
-      "updatedAt": "2026-10-18T00:37:13.724Z",
-      "summary": "PR #16 melhora rolagem e acessibilidade da classificação no celular. Campeonato/Elenco/Packs conferidos em 360px e 1440px; teclado e foco reais verificados, 7 capturas. 70 testes, lint, tipos, auditoria e build locais aprovados; CI remota pendente. Sem merge/deploy.",
+      "updatedAt": "2026-10-18T00:38:41.675Z",
+      "summary": "PR #16 pronto para revisão: classificação com rolagem e teclado acessíveis. Campeonato/Elenco/Packs verificados em 360/1440px, 7 capturas reais. 70 testes, lint, tipos, auditoria e build aprovados; CI Linux/Windows verde. Fila confirmou limite de 3 PRs (#12/#15/#16); aguardar revisão antes de novas tarefas. Sem merge/deploy.",
       "checks": [
         {
           "name": "npm ci",
@@ -128,9 +128,19 @@
           "pageErrors": 0
         },
         {
-          "name": "GitHub CI",
-          "exitCode": null,
-          "result": "pending"
+          "name": "GitHub CI Linux and Windows",
+          "exitCode": 0,
+          "run": 39083408102
+        },
+        {
+          "name": "live backlog open PR cap",
+          "exitCode": 0,
+          "action": "wait",
+          "openPullRequests": [
+            12,
+            15,
+            16
+          ]
         }
       ]
     }
@@ -152,7 +162,7 @@
       "runId": "visual-mobile-20261017",
       "status": "awaiting_review",
       "attempts": 1,
-      "updatedAt": "2026-10-18T00:37:13.724Z"
+      "updatedAt": "2026-10-18T00:38:41.675Z"
     }
   ]
 }
