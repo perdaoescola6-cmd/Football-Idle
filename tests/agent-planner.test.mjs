@@ -122,6 +122,9 @@ test("closed PRs must be reconciled and repair attempts are bounded", () => {
   s.progress.claims[0].status = "awaiting_review";
   s.pullRequests = [];
   assert.equal(planRun(s).action, "reconcile");
+  s.progress.claims[0].status = "merged";
+  s.progress.claims[0].attempts = 1;
+  assert.equal(planRun(s).branch, "codex/5-rankings-2");
 });
 
 test("progress refuses credentials and unsafe branches; policy cannot silently enable merging", () => {

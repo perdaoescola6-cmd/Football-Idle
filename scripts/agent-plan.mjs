@@ -166,7 +166,10 @@ export function planRun(snapshot, p = policy) {
     issueNumber: selected.number,
     title: selected.title,
     area: topic(selected),
-    branch: claim?.branch ?? `codex/${selected.number}-${topic(selected)}`,
+    branch:
+      claim && ["running", "failed"].includes(claim.status)
+        ? claim.branch
+        : `codex/${selected.number}-${topic(selected)}${claim?.status === "merged" ? `-${(claim.attempts ?? 1) + 1}` : ""}`,
     openPullRequests: prs.map((pr) => pr.number),
     validationCommands: p.validationCommands,
     reason:
