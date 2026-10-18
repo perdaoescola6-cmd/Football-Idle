@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:03:25.489Z",
+  "lastUpdated": "2026-10-18T00:05:58.997Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -30,16 +30,46 @@
     },
     {
       "runId": "initial-rankings-20261017",
-      "status": "running",
+      "status": "awaiting_review",
       "branch": "codex/5-rankings",
       "issueNumber": 5,
-      "pullRequest": null,
-      "updatedAt": "2026-10-18T00:03:25.489Z",
-      "summary": "Teste inicial com backlog real: planejador selecionou #5; correção independente de rankings históricos, sem integrar o PR #12 pendente.",
+      "pullRequest": 15,
+      "updatedAt": "2026-10-18T00:05:58.997Z",
+      "summary": "PR #15 corrige rankings históricos após avanço da temporada. 71 testes, lint, tipos, auditoria e build locais aprovados. CI remota pendente. #5 parcial: paginação e critérios/filtros visíveis ainda pendentes. Não integrar automaticamente.",
       "checks": [
         {
-          "name": "live backlog planner",
+          "name": "npm ci",
           "exitCode": 0
+        },
+        {
+          "name": "lint",
+          "exitCode": 0
+        },
+        {
+          "name": "agent:check",
+          "exitCode": 0
+        },
+        {
+          "name": "typecheck",
+          "exitCode": 0
+        },
+        {
+          "name": "audit:catalog",
+          "exitCode": 0
+        },
+        {
+          "name": "npm test",
+          "exitCode": 0,
+          "tests": 71
+        },
+        {
+          "name": "build:check",
+          "exitCode": 0
+        },
+        {
+          "name": "GitHub CI",
+          "exitCode": null,
+          "result": "pending"
         }
       ]
     }
@@ -48,11 +78,11 @@
     {
       "issueNumber": 5,
       "branch": "codex/5-rankings",
-      "pullRequest": null,
+      "pullRequest": 15,
       "runId": "initial-rankings-20261017",
-      "status": "running",
+      "status": "awaiting_review",
       "attempts": 1,
-      "updatedAt": "2026-10-18T00:03:25.489Z"
+      "updatedAt": "2026-10-18T00:05:58.997Z"
     }
   ]
 }
