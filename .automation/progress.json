@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:40:39.458Z",
+  "lastUpdated": "2026-10-18T00:45:53.813Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -146,16 +146,54 @@
     },
     {
       "runId": "lineup-ux-20261017",
-      "status": "running",
+      "status": "awaiting_review",
       "branch": "codex/17-competition",
       "issueNumber": 17,
-      "pullRequest": null,
-      "updatedAt": "2026-10-18T00:40:39.458Z",
-      "summary": "Nova direção do usuário: jogabilidade e UX. Planejador selecionou #17 para impedir que alterações não salvas sejam ignoradas ao jogar; #16 adiado com código preservado.",
+      "pullRequest": 19,
+      "updatedAt": "2026-10-18T00:45:53.813Z",
+      "summary": "PR #19 corrige decisões de escalação ignoradas: aviso persistente, salvar/revisar/descartar, bloqueio de PLAY com rascunho e preservação em erro. Fluxos reais de navegador e recarga verificados; 70 testes, lint, tipos, auditoria e build aprovados localmente. CI pendente. #18 próximo foco: utilidade dos reforços. #16 adiado por direção do usuário.",
       "checks": [
         {
-          "name": "live backlog planner",
+          "name": "npm ci",
           "exitCode": 0
+        },
+        {
+          "name": "lint",
+          "exitCode": 0
+        },
+        {
+          "name": "agent:check",
+          "exitCode": 0
+        },
+        {
+          "name": "typecheck",
+          "exitCode": 0
+        },
+        {
+          "name": "audit:catalog",
+          "exitCode": 0
+        },
+        {
+          "name": "npm test",
+          "exitCode": 0,
+          "tests": 70
+        },
+        {
+          "name": "build:check",
+          "exitCode": 0
+        },
+        {
+          "name": "real browser lineup draft and server rejection",
+          "exitCode": 0
+        },
+        {
+          "name": "native beforeunload and discard",
+          "exitCode": 0
+        },
+        {
+          "name": "GitHub CI",
+          "exitCode": null,
+          "result": "pending"
         }
       ]
     }
@@ -182,11 +220,11 @@
     {
       "issueNumber": 17,
       "branch": "codex/17-competition",
-      "pullRequest": null,
+      "pullRequest": 19,
       "runId": "lineup-ux-20261017",
-      "status": "running",
+      "status": "awaiting_review",
       "attempts": 1,
-      "updatedAt": "2026-10-18T00:40:39.458Z"
+      "updatedAt": "2026-10-18T00:45:53.813Z"
     }
   ]
 }
