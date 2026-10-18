@@ -14,6 +14,8 @@ Execute `npm run lint`, `npm run typecheck`, `npm test` e `npm run build:check`.
 
 ## Estado e contribuição
 
+O [desenvolvimento recorrente](docs/24-autonomous-development.md) seleciona backlog aprovado, trabalha em branches e abre até três PRs independentes. O [progresso persistente](AUTONOMOUS_PROGRESS.md) permite retomar cada execução. Não há merge nem deploy automático.
+
 O catálogo importado tem 844 identidades e 854 edições históricas; ratings e odds são regras experimentais. A campanha é individual contra AI em regulamento compacto, sem reproduzir integralmente os campeonatos da CBF. Não há pagamentos reais implementados.
 
 - [Registro completo preservado do Work](docs/WORK-PROJECT.md)

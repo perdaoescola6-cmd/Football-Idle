@@ -4,8 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "agent:check": "node scripts/agent-plan.mjs --validate",
+    "agent:snapshot": "node scripts/agent-snapshot.mjs",
+    "agent:plan": "node scripts/agent-plan.mjs --snapshot .automation/local/snapshot.json",
     "audit:catalog": "node --import tsx scripts/audit-catalog.mjs",
-    "lint": "prettier --check \"apps/server/**/*.ts\" \"apps/web/app/**/*.{ts,tsx,css}\" \"packages/**/*.ts\" \"scripts/*.mjs\" \"tests/*.ts\" \"*.json\" \".github/**/*.{yml,md}\"",
+    "lint": "prettier --check \"apps/server/**/*.ts\" \"apps/web/app/**/*.{ts,tsx,css}\" \"packages/**/*.ts\" \"scripts/*.mjs\" \"tests/*.{ts,mjs}\" \"*.json\" \".automation/*.json\" \".github/**/*.{yml,md}\"",
     "dev": "node scripts/dev.mjs",
     "dev:web": "next dev apps/web --hostname 127.0.0.1 --port 3000",
     "dev:api": "tsx apps/server/src/main.ts",
@@ -14,7 +17,7 @@
     "build:check": "node scripts/check-build.mjs",
     "start:web": "next start apps/web --hostname 127.0.0.1 --port 3000",
     "typecheck": "tsc --noEmit && tsc --noEmit -p apps/web/tsconfig.json",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts tests/*.test.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -4,6 +4,8 @@ Canonical repository: perdaoescola6-cmd/Football-Idle. Read README.md and docs/1
 
 Work on one actionable issue at a time, on a fresh branch from origin/main in an isolated checkout/worktree. Never discard unrelated local work. Search existing PRs before starting; do not duplicate work awaiting review. Read nested AGENTS.md instructions.
 
+For recurring development, follow .automation/WORKER.md and .automation/policy.json. Up to three independent feature PRs may await review; one pending PR does not block unrelated work. Read the canonical AUTONOMOUS_PROGRESS.md and .automation/progress.json from origin/automation/state before selecting work. Technical implementation choices are preauthorized within the selected issue. Preserve human review and all production restrictions.
+
 Preserve saves, player ownership, Coins ledger, idempotency and transaction semantics. Treat catalog sources as historical; do not invent current affiliations. Keep packs at five cards and published odds consistent with server behavior.
 
 Run npm ci, npm run lint, npm run typecheck, npm test and npm run build:check. Add meaningful regression coverage for behavior changes. Report failures and environment limits honestly. Do not claim browser QA unless performed.

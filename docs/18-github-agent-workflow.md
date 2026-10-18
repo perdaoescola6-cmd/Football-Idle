@@ -1,5 +1,7 @@
 # GitHub e rotina do agente
 
+Atualização: o procedimento recorrente vigente está em [.automation/WORKER.md](../.automation/WORKER.md), com configuração e limites em [desenvolvimento autônomo](24-autonomous-development.md). Ele substitui os limites antigos de um único PR e a agenda diária descritos no registro histórico abaixo: agora até três tarefas independentes podem aguardar revisão, com progresso na branch automation/state. As restrições de produção, segredos, force push e merge automático continuam válidas.
+
 ## Origem e integração
 
 Inspeção em 17/10/2026: conexão GitHub com acesso admin/push; repositório público contendo somente README.md na main, commit 69766d5275e94bd82889b522df728863c60e4079. Código atual encontrado no espelho local FutIdle: apps/, packages/, scripts/, tests/, docs/ e lockfile npm. A pasta sources/ estava sem arquivos e não foi alterada. Não havia Git no espelho.
