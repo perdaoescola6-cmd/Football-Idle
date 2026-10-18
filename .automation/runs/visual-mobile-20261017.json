@@ -1,15 +1,56 @@
 {
   "runId": "visual-mobile-20261017",
-  "status": "running",
+  "status": "awaiting_review",
   "branch": "codex/13-visual",
   "issueNumber": 13,
-  "pullRequest": null,
-  "updatedAt": "2026-10-18T00:30:59.500Z",
-  "summary": "Planejador selecionou #13 visual. Conferir Campeonato, Elenco e Packs em 360px e desktop; implementar um ajuste pequeno preservando dados/economia.",
+  "pullRequest": 16,
+  "updatedAt": "2026-10-18T00:37:13.724Z",
+  "summary": "PR #16 melhora rolagem e acessibilidade da classificação no celular. Campeonato/Elenco/Packs conferidos em 360px e 1440px; teclado e foco reais verificados, 7 capturas. 70 testes, lint, tipos, auditoria e build locais aprovados; CI remota pendente. Sem merge/deploy.",
   "checks": [
     {
-      "name": "live backlog planner",
+      "name": "npm ci",
       "exitCode": 0
+    },
+    {
+      "name": "lint",
+      "exitCode": 0
+    },
+    {
+      "name": "agent:check",
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0
+    },
+    {
+      "name": "audit:catalog",
+      "exitCode": 0
+    },
+    {
+      "name": "npm test",
+      "exitCode": 0,
+      "tests": 70
+    },
+    {
+      "name": "build:check",
+      "exitCode": 0
+    },
+    {
+      "name": "real browser mobile and desktop",
+      "exitCode": 0,
+      "widths": [
+        360,
+        1440
+      ],
+      "screens": 3,
+      "apiRequests": 12,
+      "pageErrors": 0
+    },
+    {
+      "name": "GitHub CI",
+      "exitCode": null,
+      "result": "pending"
     }
   ]
 }
