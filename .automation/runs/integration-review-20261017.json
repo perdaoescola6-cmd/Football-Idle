@@ -1,0 +1,33 @@
+{
+  "runId": "integration-review-20261017",
+  "status": "awaiting_review",
+  "branch": "codex/review-gameplay-batch",
+  "issueNumber": null,
+  "pullRequest": null,
+  "updatedAt": "2026-10-18T00:59:54.474Z",
+  "summary": "Revisão das propostas #12 (ligas), #15 (rankings) e #19 (escalação): reunidas apenas em cópia local, sem conflitos; 76/76 testes, lint, tipos, auditoria e build aprovados. CI individual Linux/Windows verde para os três heads. Main GitHub não alterada. Limite de 3 PRs atingido; integração humana necessária para liberar #18 packs.",
+  "checks": [
+    {
+      "name": "combined local suite",
+      "exitCode": 0,
+      "tests": 76
+    },
+    {
+      "name": "lint, policy, typecheck and catalog audit",
+      "exitCode": 0
+    },
+    {
+      "name": "build:check",
+      "exitCode": 0
+    },
+    {
+      "name": "individual GitHub Linux and Windows CI",
+      "exitCode": 0,
+      "pullRequests": [
+        12,
+        15,
+        19
+      ]
+    }
+  ]
+}
