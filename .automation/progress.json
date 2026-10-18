@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:38:41.675Z",
+  "lastUpdated": "2026-10-18T00:40:18.697Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -80,12 +80,12 @@
     },
     {
       "runId": "visual-mobile-20261017",
-      "status": "awaiting_review",
+      "status": "blocked",
       "branch": "codex/13-visual",
       "issueNumber": 13,
       "pullRequest": 16,
-      "updatedAt": "2026-10-18T00:38:41.675Z",
-      "summary": "PR #16 pronto para revisão: classificação com rolagem e teclado acessíveis. Campeonato/Elenco/Packs verificados em 360/1440px, 7 capturas reais. 70 testes, lint, tipos, auditoria e build aprovados; CI Linux/Windows verde. Fila confirmou limite de 3 PRs (#12/#15/#16); aguardar revisão antes de novas tarefas. Sem merge/deploy.",
+      "updatedAt": "2026-10-18T00:40:18.697Z",
+      "summary": "Adiado por orientação explícita do usuário: foco em desenvolvimento do jogo e UX, não adaptação para celular. PR #16 fechado sem merge; branch e provas preservadas. #13 removida de agent:ready. Não retomar automaticamente.",
       "checks": [
         {
           "name": "npm ci",
@@ -160,9 +160,9 @@
       "branch": "codex/13-visual",
       "pullRequest": 16,
       "runId": "visual-mobile-20261017",
-      "status": "awaiting_review",
+      "status": "blocked",
       "attempts": 1,
-      "updatedAt": "2026-10-18T00:38:41.675Z"
+      "updatedAt": "2026-10-18T00:40:18.697Z"
     }
   ]
 }
