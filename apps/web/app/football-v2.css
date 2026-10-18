@@ -2,6 +2,31 @@
   --v2-gold: #cbb779;
   max-width: 1360px;
 }
+.fb-standings-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #a4bab1 #15262b;
+  border-radius: 4px;
+  scroll-margin-block: 20px;
+}
+.fb-standings-scroll:focus-visible {
+  outline: 3px solid #e5edb9;
+  outline-offset: 4px;
+}
+.football .fb-table-hint {
+  display: none;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c5d5cd;
+  margin: 0 0 14px;
+}
+@media (max-width: 700px) {
+  .football .fb-table-hint {
+    display: block;
+  }
+}
 .fb-header {
   border-bottom: 1px solid #52604b;
   margin-bottom: 20px;

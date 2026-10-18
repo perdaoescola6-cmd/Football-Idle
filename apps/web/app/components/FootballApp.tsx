@@ -586,46 +586,74 @@ export default function FootballApp() {
             />
           ) : null}
           <SeasonCalendar f={f} onClub={setClubSheet} />
-          <section className="fb-panel fb-table" id="championship-table">
-            <h2>
+          <section className="fb-panel" id="championship-table">
+            <h2 id="championship-heading">
               Classificação · Série {["D", "C", "B", "A"][season.division]}
             </h2>
-            <table>
-              <thead>
-                <tr>
-                  {["#", "Clube", "P", "J", "V", "E", "D", "SG"].map((c) => (
-                    <th key={c}>{c}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {season.table.map((t, i) => (
-                  <tr
-                    key={t.id}
-                    className={t.id === game.club.id ? "fb-own" : ""}
-                  >
-                    <td>{i + 1}</td>
-                    <td>
-                      <button
-                        className="v2-name-link"
-                        onClick={() => setClubSheet(t.id)}
+            <p className="fb-table-hint" id="championship-scroll-hint">
+              Deslize para ver todas as colunas. No teclado, selecione a tabela
+              com Tab e use as setas para os lados.
+            </p>
+            <div
+              className="fb-standings-scroll"
+              role="region"
+              aria-labelledby="championship-heading"
+              aria-describedby="championship-scroll-hint"
+              tabIndex={0}
+            >
+              <table>
+                <thead>
+                  <tr>
+                    {[
+                      ["#", "Posição"],
+                      ["Clube", "Clube"],
+                      ["P", "Pontos"],
+                      ["J", "Jogos"],
+                      ["V", "Vitórias"],
+                      ["E", "Empates"],
+                      ["D", "Derrotas"],
+                      ["SG", "Saldo de gols"],
+                    ].map(([label, description]) => (
+                      <th
+                        key={label}
+                        scope="col"
+                        aria-label={description}
+                        title={description}
                       >
-                        {t.name}
-                      </button>
-                      {t.ai ? " · AI" : " · Você"}
-                    </td>
-                    <td>
-                      <strong>{t.points}</strong>
-                    </td>
-                    <td>{t.played}</td>
-                    <td>{t.wins}</td>
-                    <td>{t.draws}</td>
-                    <td>{t.losses}</td>
-                    <td>{t.gf - t.ga}</td>
+                        {label}
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {season.table.map((t, i) => (
+                    <tr
+                      key={t.id}
+                      className={t.id === game.club.id ? "fb-own" : ""}
+                    >
+                      <td>{i + 1}</td>
+                      <td>
+                        <button
+                          className="v2-name-link"
+                          onClick={() => setClubSheet(t.id)}
+                        >
+                          {t.name}
+                        </button>
+                        {t.ai ? " · AI" : " · Você"}
+                      </td>
+                      <td>
+                        <strong>{t.points}</strong>
+                      </td>
+                      <td>{t.played}</td>
+                      <td>{t.wins}</td>
+                      <td>{t.draws}</td>
+                      <td>{t.losses}</td>
+                      <td>{t.gf - t.ga}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </section>
           <section className="fb-panel">
             <h2>Jogos do clube</h2>
