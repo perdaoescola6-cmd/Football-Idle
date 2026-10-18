@@ -2,6 +2,30 @@
   --v2-gold: #cbb779;
   max-width: 1360px;
 }
+.lineup-draft-notice {
+  border: 1px solid #cbb779;
+  border-left: 4px solid #cbb779;
+  border-radius: 8px;
+  background: #302f23;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+.lineup-draft-notice strong {
+  display: block;
+  color: #f1df9f;
+  margin-bottom: 6px;
+}
+.lineup-draft-notice p {
+  line-height: 1.6;
+  margin: 0;
+}
+.lineup-draft-notice [role="alert"] {
+  color: #ffd0bd;
+  margin-top: 12px;
+}
+.lineup-draft-notice .fb-actions {
+  margin-bottom: 0;
+}
 .fb-header {
   border-bottom: 1px solid #52604b;
   margin-bottom: 20px;

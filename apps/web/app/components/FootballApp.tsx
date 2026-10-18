@@ -71,6 +71,8 @@ export default function FootballApp() {
     [clubSheet, setClubSheet] = useState<string | null>(null);
   const catalogRequest = useRef<Promise<CardEdition[]> | null>(null);
   const requestSequence = useRef(0);
+  const lineupHeading = useRef<HTMLHeadingElement>(null);
+  const [lineupError, setLineupError] = useState("");
   const [collectionLimit, setCollectionLimit] = useState(60);
   const definitions = useMemo(
     () => new Map(f?.catalog.map((c) => [c.id, c])),
@@ -123,6 +125,12 @@ export default function FootballApp() {
       setTactic(f.tactic);
     }
   }, [f, dirty]);
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (event: BeforeUnloadEvent) => event.preventDefault();
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
   async function perform(run: () => Promise<unknown>) {
     if (busy) return;
     setBusy(true);
@@ -147,6 +155,39 @@ export default function FootballApp() {
       setRevealed(0);
     }
     return r;
+  }
+  function saveLineup() {
+    if (busy || f?.match || !dirty) return;
+    setLineupError("");
+    void perform(async () => {
+      try {
+        await command({
+          action: "LINEUP",
+          ids: lineup,
+          bench,
+          formation,
+          tactic,
+        });
+        setDirty(false);
+      } catch (error) {
+        setLineupError(
+          error instanceof Error
+            ? error.message
+            : "Não foi possível salvar a escalação.",
+        );
+        throw error;
+      }
+    });
+  }
+  function discardLineup() {
+    if (busy || !f) return;
+    setLineup(f.lineup);
+    setBench(f.bench);
+    setFormation(f.formation);
+    setTactic(f.tactic);
+    setDirty(false);
+    setLineupError("");
+    setMessage("Alterações descartadas. A escalação salva foi mantida.");
   }
   const def = (card: OwnedCard) => definitions.get(card.editionId)!;
   const openPlayer = (card: CardEdition, owned?: OwnedCard) =>
@@ -444,6 +485,40 @@ export default function FootballApp() {
           ? "Salvando no clube…"
           : message || "Tudo pronto para a próxima rodada."}
       </div>
+      {dirty && (
+        <aside
+          className="lineup-draft-notice"
+          aria-label="Alterações da escalação"
+        >
+          <p id="lineup-draft-help" role="status">
+            <strong>Alterações não salvas</strong>
+            Seu time em campo ainda usa a escalação salva. Revise e salve suas
+            mudanças antes de disputar a próxima rodada, ou descarte para manter
+            o time anterior.
+          </p>
+          {lineupError && (
+            <p role="alert">{lineupError} Suas alterações continuam aqui.</p>
+          )}
+          <div className="fb-actions">
+            {tab !== "Elenco" && (
+              <button
+                onClick={() => {
+                  setTab("Elenco");
+                  requestAnimationFrame(() => lineupHeading.current?.focus());
+                }}
+              >
+                Revisar escalação
+              </button>
+            )}
+            <button disabled={busy || Boolean(live)} onClick={saveLineup}>
+              {busy ? "Salvando…" : "Salvar alterações"}
+            </button>
+            <button disabled={busy} onClick={discardLineup}>
+              Descartar alterações
+            </button>
+          </div>
+        </aside>
+      )}
       {!f.welcomeClaimed && (
         <aside className="fb-banner">
           <div>
@@ -520,14 +595,16 @@ export default function FootballApp() {
                 juntos
               </p>
               <button
-                disabled={busy || Boolean(live)}
-                onClick={() =>
+                disabled={busy || Boolean(live) || dirty}
+                aria-describedby={dirty ? "lineup-draft-help" : undefined}
+                onClick={() => {
+                  if (dirty) return;
                   void perform(() =>
                     command({
                       action: season.round > 14 ? "NEXT_SEASON" : "PLAY",
                     }),
-                  )
-                }
+                  );
+                }}
               >
                 {live
                   ? "Partida em andamento"
@@ -648,7 +725,9 @@ export default function FootballApp() {
       )}
       {tab === "Elenco" && (
         <section className="fb-panel">
-          <h2>Escalação e tática</h2>
+          <h2 ref={lineupHeading} tabIndex={-1}>
+            Escalação e tática
+          </h2>
           <p>
             Escolha onze jogadores únicos nas posições da formação. Até sete
             cartas no banco. Alterações valem para a próxima partida.
@@ -658,6 +737,7 @@ export default function FootballApp() {
               Formação
               <select
                 value={formation}
+                disabled={busy || Boolean(live)}
                 onChange={(e) => {
                   setDirty(true);
                   setFormation(e.target.value as Formation);
@@ -672,6 +752,7 @@ export default function FootballApp() {
               Tática
               <select
                 value={tactic}
+                disabled={busy || Boolean(live)}
                 onChange={(e) => {
                   setDirty(true);
                   setTactic(e.target.value as Tactic);
@@ -685,7 +766,12 @@ export default function FootballApp() {
           </div>
           <div className="fb-actions">
             <button
-              disabled={busy || Boolean(live)}
+              disabled={busy || Boolean(live) || dirty}
+              title={
+                dirty
+                  ? "Salve ou descarte suas alterações antes de aplicar a sugestão."
+                  : undefined
+              }
               onClick={() =>
                 void perform(async () => {
                   await command({ action: "AUTO_LINEUP", formation, tactic });
@@ -699,7 +785,7 @@ export default function FootballApp() {
               Capitão
               <select
                 value={f.captain ?? ""}
-                disabled={busy || Boolean(live)}
+                disabled={busy || Boolean(live) || dirty}
                 onChange={(e) =>
                   void perform(() =>
                     command({ action: "CAPTAIN", id: e.target.value }),
@@ -728,6 +814,7 @@ export default function FootballApp() {
                 Titular {i + 1} · {expected[i]}
                 <select
                   value={id}
+                  disabled={busy || Boolean(live)}
                   onChange={(e) => {
                     setDirty(true);
                     setLineup(
@@ -769,7 +856,11 @@ export default function FootballApp() {
                   <input
                     type="checkbox"
                     checked={bench.includes(c.id)}
-                    disabled={!bench.includes(c.id) && bench.length >= 7}
+                    disabled={
+                      busy ||
+                      Boolean(live) ||
+                      (!bench.includes(c.id) && bench.length >= 7)
+                    }
                     onChange={(e) => {
                       setDirty(true);
                       setBench(
@@ -784,19 +875,8 @@ export default function FootballApp() {
               ))}
           </div>
           <button
-            disabled={busy || Boolean(live)}
-            onClick={() =>
-              void perform(async () => {
-                await command({
-                  action: "LINEUP",
-                  ids: lineup,
-                  bench,
-                  formation,
-                  tactic,
-                });
-                setDirty(false);
-              })
-            }
+            disabled={busy || Boolean(live) || !dirty}
+            onClick={saveLineup}
           >
             Salvar escalação
           </button>
