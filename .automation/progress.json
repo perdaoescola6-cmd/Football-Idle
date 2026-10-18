@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:07:59.925Z",
+  "lastUpdated": "2026-10-18T00:30:59.500Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -77,6 +77,21 @@
           "nextIssue": 13
         }
       ]
+    },
+    {
+      "runId": "visual-mobile-20261017",
+      "status": "running",
+      "branch": "codex/13-visual",
+      "issueNumber": 13,
+      "pullRequest": null,
+      "updatedAt": "2026-10-18T00:30:59.500Z",
+      "summary": "Planejador selecionou #13 visual. Conferir Campeonato, Elenco e Packs em 360px e desktop; implementar um ajuste pequeno preservando dados/economia.",
+      "checks": [
+        {
+          "name": "live backlog planner",
+          "exitCode": 0
+        }
+      ]
     }
   ],
   "claims": [
@@ -88,6 +103,15 @@
       "status": "awaiting_review",
       "attempts": 1,
       "updatedAt": "2026-10-18T00:07:59.925Z"
+    },
+    {
+      "issueNumber": 13,
+      "branch": "codex/13-visual",
+      "pullRequest": null,
+      "runId": "visual-mobile-20261017",
+      "status": "running",
+      "attempts": 1,
+      "updatedAt": "2026-10-18T00:30:59.500Z"
     }
   ]
 }
