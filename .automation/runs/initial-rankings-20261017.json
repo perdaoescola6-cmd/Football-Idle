@@ -1,0 +1,15 @@
+{
+  "runId": "initial-rankings-20261017",
+  "status": "running",
+  "branch": "codex/5-rankings",
+  "issueNumber": 5,
+  "pullRequest": null,
+  "updatedAt": "2026-10-18T00:03:25.489Z",
+  "summary": "Teste inicial com backlog real: planejador selecionou #5; correção independente de rankings históricos, sem integrar o PR #12 pendente.",
+  "checks": [
+    {
+      "name": "live backlog planner",
+      "exitCode": 0
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 {
   "runId": "autonomy-bootstrap-20261017",
-  "status": "running",
+  "status": "merged",
   "branch": "codex/autonomy-setup",
   "issueNumber": null,
   "pullRequest": 14,
-  "updatedAt": "2026-10-18T00:00:48.510Z",
-  "summary": "Infraestrutura criada; 70 testes locais e build passaram. CI do último ajuste em andamento. Nenhuma funcionalidade integrada automaticamente.",
+  "updatedAt": "2026-10-18T00:03:25.325Z",
+  "summary": "Configuração ativada na main pelo PR #14 após CI Linux e Windows aprovada. Rotina nativa atualizada para cada duas horas entre 08h e 22h. PRs de funcionalidades continuam exigindo revisão.",
   "checks": [
     {
-      "name": "local full suite",
+      "name": "local suite",
       "exitCode": 0,
       "tests": 70
     },
@@ -17,9 +17,9 @@
       "exitCode": 0
     },
     {
-      "name": "CI final",
-      "exitCode": null,
-      "result": "pending"
+      "name": "CI Linux and Windows",
+      "exitCode": 0,
+      "run": 39081141329
     }
   ]
 }
