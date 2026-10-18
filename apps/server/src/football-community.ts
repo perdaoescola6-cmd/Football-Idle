@@ -60,27 +60,33 @@ export function registerFootballCommunity(
         f.season.division !== (query.division ?? 0)
       )
         continue;
-      if (
+      const rankingSeason =
         query.scope === "season" &&
         query.season &&
         f.season.number !== query.season
-      )
-        continue;
-      const own = f.season.table.find((t) => t.id === row.id)!;
-      clubs.push({
-        id: row.id,
-        name: row.name,
-        division: f.season.division,
-        season: f.season.number,
-        seasonPoints: own.points,
-        seasonRecord: own,
-        position: standings(f.season).findIndex((t) => t.id === row.id) + 1,
-        career: f.careerV2!,
-      });
+          ? f.seasons.find((s) => s.number === query.season)
+          : f.season;
+      if (!rankingSeason) continue;
+      const own = rankingSeason.table?.find((t) => t.id === row.id);
+      // Older archives can lack standings; never substitute today's table.
+      if (own)
+        clubs.push({
+          id: row.id,
+          name: row.name,
+          division: rankingSeason.division,
+          season: rankingSeason.number,
+          seasonPoints: own.points,
+          seasonRecord: own,
+          position:
+            "position" in rankingSeason
+              ? rankingSeason.position
+              : standings(rankingSeason).findIndex((t) => t.id === row.id) + 1,
+          career: f.careerV2!,
+        });
       for (const original of Object.values(f.performance ?? {})) {
         const p = structuredClone(original);
         if (query.scope === "season") {
-          const stats = p.seasons[String(f.season.number)];
+          const stats = p.seasons[String(rankingSeason.number)];
           if (!stats) continue;
           for (const field of [
             "appearances",
