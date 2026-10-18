@@ -1,0 +1,15 @@
+{
+  "runId": "lineup-ux-20261017",
+  "status": "running",
+  "branch": "codex/17-competition",
+  "issueNumber": 17,
+  "pullRequest": null,
+  "updatedAt": "2026-10-18T00:40:39.458Z",
+  "summary": "Nova direção do usuário: jogabilidade e UX. Planejador selecionou #17 para impedir que alterações não salvas sejam ignoradas ao jogar; #16 adiado com código preservado.",
+  "checks": [
+    {
+      "name": "live backlog planner",
+      "exitCode": 0
+    }
+  ]
+}

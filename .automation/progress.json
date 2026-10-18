@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:40:18.697Z",
+  "lastUpdated": "2026-10-18T00:40:39.458Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -143,6 +143,21 @@
           ]
         }
       ]
+    },
+    {
+      "runId": "lineup-ux-20261017",
+      "status": "running",
+      "branch": "codex/17-competition",
+      "issueNumber": 17,
+      "pullRequest": null,
+      "updatedAt": "2026-10-18T00:40:39.458Z",
+      "summary": "Nova direção do usuário: jogabilidade e UX. Planejador selecionou #17 para impedir que alterações não salvas sejam ignoradas ao jogar; #16 adiado com código preservado.",
+      "checks": [
+        {
+          "name": "live backlog planner",
+          "exitCode": 0
+        }
+      ]
     }
   ],
   "claims": [
@@ -163,6 +178,15 @@
       "status": "blocked",
       "attempts": 1,
       "updatedAt": "2026-10-18T00:40:18.697Z"
+    },
+    {
+      "issueNumber": 17,
+      "branch": "codex/17-competition",
+      "pullRequest": null,
+      "runId": "lineup-ux-20261017",
+      "status": "running",
+      "attempts": 1,
+      "updatedAt": "2026-10-18T00:40:39.458Z"
     }
   ]
 }
