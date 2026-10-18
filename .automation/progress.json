@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "perdaoescola6-cmd/Football-Idle",
-  "lastUpdated": "2026-10-18T00:45:53.813Z",
+  "lastUpdated": "2026-10-18T00:47:48.638Z",
   "runs": [
     {
       "runId": "autonomy-bootstrap-20261017",
@@ -150,8 +150,8 @@
       "branch": "codex/17-competition",
       "issueNumber": 17,
       "pullRequest": 19,
-      "updatedAt": "2026-10-18T00:45:53.813Z",
-      "summary": "PR #19 corrige decisões de escalação ignoradas: aviso persistente, salvar/revisar/descartar, bloqueio de PLAY com rascunho e preservação em erro. Fluxos reais de navegador e recarga verificados; 70 testes, lint, tipos, auditoria e build aprovados localmente. CI pendente. #18 próximo foco: utilidade dos reforços. #16 adiado por direção do usuário.",
+      "updatedAt": "2026-10-18T00:47:48.638Z",
+      "summary": "PR #19 pronto para revisão: decisões de escalação protegidas antes de jogar; salvar/revisar/descartar, erro preserva rascunho, recarga avisa. Fluxos reais no navegador, 70 testes, lint, tipos, auditoria e build aprovados. CI Linux/Windows verde. Nova orientação ativa: jogabilidade/UX, #16 adiado e #18 próximo foco de reforços. Sem merge/deploy.",
       "checks": [
         {
           "name": "npm ci",
@@ -191,9 +191,9 @@
           "exitCode": 0
         },
         {
-          "name": "GitHub CI",
-          "exitCode": null,
-          "result": "pending"
+          "name": "GitHub CI Linux and Windows",
+          "exitCode": 0,
+          "run": 39083951932
         }
       ]
     }
@@ -224,7 +224,7 @@
       "runId": "lineup-ux-20261017",
       "status": "awaiting_review",
       "attempts": 1,
-      "updatedAt": "2026-10-18T00:45:53.813Z"
+      "updatedAt": "2026-10-18T00:47:48.638Z"
     }
   ]
 }
