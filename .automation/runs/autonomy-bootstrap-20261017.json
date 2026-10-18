@@ -1,0 +1,25 @@
+{
+  "runId": "autonomy-bootstrap-20261017",
+  "status": "running",
+  "branch": "codex/autonomy-setup",
+  "issueNumber": null,
+  "pullRequest": 14,
+  "updatedAt": "2026-10-18T00:00:48.510Z",
+  "summary": "Infraestrutura criada; 70 testes locais e build passaram. CI do último ajuste em andamento. Nenhuma funcionalidade integrada automaticamente.",
+  "checks": [
+    {
+      "name": "local full suite",
+      "exitCode": 0,
+      "tests": 70
+    },
+    {
+      "name": "build:check",
+      "exitCode": 0
+    },
+    {
+      "name": "CI final",
+      "exitCode": null,
+      "result": "pending"
+    }
+  ]
+}

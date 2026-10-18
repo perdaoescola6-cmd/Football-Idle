@@ -1,7 +1,9 @@
 # Progresso do desenvolvimento autônomo
 
-O registro canônico de execuções fica na [branch automation/state](https://github.com/perdaoescola6-cmd/Football-Idle/blob/automation/state/AUTONOMOUS_PROGRESS.md), para não exigir commits diretos na main ou um merge só para atualizar progresso.
+Registro canônico na branch automation/state. Última atualização: 2026-10-18T00:00:48.510Z.
 
-Essa branch contém .automation/progress.json, os relatórios .automation/runs/ e o histórico legível. As branches de funcionalidades e seus PRs continuam separados. O worker lê o registro remoto a cada execução e não interpreta a ausência de mudanças na main como ausência de progresso.
+| Atualização UTC | Tarefa | Estado | PR | Resultado |
+| --- | --- | --- | --- | --- |
+| 2026-10-18T00:00:48.510Z | Infraestrutura | running | [#14](https://github.com/perdaoescola6-cmd/Football-Idle/pull/14) | Infraestrutura criada; 70 testes locais e build passaram. CI do último ajuste em andamento. Nenhuma funcionalidade integrada automaticamente. |
 
-Procedimento: [.automation/WORKER.md](.automation/WORKER.md). Configuração: [.automation/policy.json](.automation/policy.json).
+O registro detalhado de cada execução está em .automation/runs/. Nenhum merge ou deploy automático está autorizado.
